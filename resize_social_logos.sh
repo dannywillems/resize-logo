@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 # Input SVG file (provide as first argument)
 INPUT_SVG="$1"
 
@@ -34,25 +32,27 @@ fi
 
 # Define sizes for each platform
 sizes=(
-    "Twitter:400x400"
     "Bluesky:420x420"
-    "Reddit:256x256"
-    "LinkedIn:300x300"
-    "Mastodon:400x400"
-    "GitHub:500x500"
-    "YouTube:800x800"
     "Discord:512x512"
     "Facebook:512x512"
+    "GitHub:500x500"
+    "Instagram:1080x1080"
+    "LinkedIn:300x300"
+    "Mastodon:400x400"
+    "Reddit:256x256"
+    "Threads:1080x1080"
     "Twitch:600x600"
+    "Twitter:400x400"
+    "YouTube:800x800"
 )
 
 # Loop through each platform and generate resized logos
 for size in "${sizes[@]}"; do
     platform=$(echo $size | cut -d: -f1 | tr '[:upper:]' '[:lower:]')
     dimensions=$(echo $size | cut -d: -f2)
+    width=$(echo $dimensions | cut -dx -f1)
+    height=$(echo $dimensions | cut -dx -f2)
     output_file="$OUTPUT_DIR/${platform}_logo_${dimensions}_${COLOR_NAME}.png"
-
-    echo "Generating $platform logo with size $dimensions and color $COLOR_NAME..."
 
     # Check if the file already exists
     if [ -f "$output_file" ]; then
@@ -60,8 +60,15 @@ for size in "${sizes[@]}"; do
         continue
     fi
 
-    # Convert SVG to PNG with specified dimensions
-    convert -background none -resize "$dimensions" -gravity center -extent "${width}x${height}" "$INPUT_SVG" "$output_file"
+    echo "Generating $platform logo with size $dimensions and color $COLOR_NAME..."
+
+    # Convert SVG to PNG with proper centering and square output
+    convert "$INPUT_SVG" \
+        -resize "${width}x${height}^" \
+        -gravity center \
+        -background none \
+        -extent "${width}x${height}" \
+        "$output_file"
 
     if [[ $? -eq 0 ]]; then
         echo "$platform logo saved to $output_file"
@@ -70,4 +77,4 @@ for size in "${sizes[@]}"; do
     fi
 done
 
-echo "All logos have been resized and saved in the '$OUTPUT_DIR' directory."
+echo "All logos have been resized, centered, and saved in the '$OUTPUT_DIR' directory."
