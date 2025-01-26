@@ -4,6 +4,26 @@ This repository contains scripts for resizing SVG files into platform-specific
 dimensions for logos and banners. Both scripts support centering the content,
 preserving aspect ratios, and optional color customization for the SVG.
 
+## Table of Contents
+- [Social Media Logo and Banner Resizer](#social-media-logo-and-banner-resizer)
+  - [Requirements](#requirements)
+  - [Scripts Overview](#scripts-overview)
+    - [1. resize_social_logos.sh](#1-resize_social_logossh)
+      - [Usage](#usage)
+      - [Parameters](#parameters)
+      - [Example](#example)
+      - [Logo Sizes](#logo-sizes)
+      - [File Naming Convention](#file-naming-convention)
+    - [2. resize_social_banner.sh](#2-resize_social_bannersh)
+      - [Usage](#usage-1)
+      - [Parameters](#parameters-1)
+      - [Example](#example-1)
+      - [Expected Input](#expected-input)
+      - [Banner Sizes](#banner-sizes)
+      - [File Naming Convention](#file-naming-convention-1)
+  - [Notes](#notes)
+  - [Troubleshooting](#troubleshooting)
+
 ## Requirements
 
 - **ImageMagick**: Ensure ImageMagick is installed on your system. You can
