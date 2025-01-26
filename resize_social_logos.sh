@@ -42,6 +42,7 @@ sizes=(
     "GitHub:500x500"
     "YouTube:800x800"
     "Discord:512x512"
+    "Facebook:512x512"
     "Twitch:600x600"
 )
 
@@ -52,6 +53,12 @@ for size in "${sizes[@]}"; do
     output_file="$OUTPUT_DIR/${platform}_logo_${dimensions}_${COLOR_NAME}.png"
 
     echo "Generating $platform logo with size $dimensions and color $COLOR_NAME..."
+
+    # Check if the file already exists
+    if [ -f "$output_file" ]; then
+        echo "Skipping $platform logo with size $dimensions and color $COLOR_NAME (already exists)."
+        continue
+    fi
 
     # Convert SVG to PNG with specified dimensions
     convert -background none -resize "$dimensions" -gravity center -extent "${width}x${height}" "$INPUT_SVG" "$output_file"
