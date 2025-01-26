@@ -40,6 +40,9 @@ sizes=(
     "LinkedIn:300x300"
     "Mastodon:400x400"
     "GitHub:500x500"
+    "YouTube:800x800"
+    "Discord:512x512"
+    "Twitch:600x600"
 )
 
 # Loop through each platform and generate resized logos
