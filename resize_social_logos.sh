@@ -24,7 +24,7 @@ mkdir -p "$OUTPUT_DIR"
 if [ -n "$COLOR" ]; then
     MODIFIED_SVG="$OUTPUT_DIR/modified_input.svg"
     echo "Updating SVG color to $COLOR..."
-    sed "s/fill:[^;]*;/fill:$COLOR;/g" "$INPUT_SVG" > "$MODIFIED_SVG"
+    sed -E 's/fill="[^"]+"/fill="'$COLOR'"/g; s/fill:[^;]*;/fill:'$COLOR';/g' "$INPUT_SVG" > "$MODIFIED_SVG"
     INPUT_SVG="$MODIFIED_SVG"
     # Replace '#' in the color code with an empty string for file naming
     COLOR_NAME=$(echo "$COLOR" | sed 's/#//g')
